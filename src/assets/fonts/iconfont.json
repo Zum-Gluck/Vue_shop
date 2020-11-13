@@ -13,11 +13,53 @@
       "unicode_decimal": 58895
     },
     {
+      "icon_id": "1012119",
+      "name": "用户",
+      "font_class": "user",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "4050389",
+      "name": "数据",
+      "font_class": "shuju",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
       "icon_id": "6664179",
       "name": "lock",
       "font_class": "lock",
       "unicode": "e61c",
       "unicode_decimal": 58908
+    },
+    {
+      "icon_id": "9771964",
+      "name": "切换",
+      "font_class": "qiehuan",
+      "unicode": "e71d",
+      "unicode_decimal": 59165
+    },
+    {
+      "icon_id": "11481334",
+      "name": "integral-fill",
+      "font_class": "integral-fill",
+      "unicode": "e726",
+      "unicode_decimal": 59174
+    },
+    {
+      "icon_id": "11488318",
+      "name": "signboard-fill",
+      "font_class": "signboard-fill",
+      "unicode": "e78d",
+      "unicode_decimal": 59277
+    },
+    {
+      "icon_id": "15470062",
+      "name": "订 单",
+      "font_class": "dingdan",
+      "unicode": "e610",
+      "unicode_decimal": 58896
     }
   ]
 }

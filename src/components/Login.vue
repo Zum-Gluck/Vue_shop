@@ -36,48 +36,48 @@
 
 <script>
 export default {
-  name: "Login",
+  name: 'Login',
   data() {
     return {
       userInfo: {
-        username: "admin",
-        password: "123456",
+        username: 'admin',
+        password: '123456',
       },
       rules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 1, max: 5, message: "长度在 3 到 5 个字符", trigger: "blur" },
+          { required: true, message: '请输入用户名', trigger: 'blur' },
+          { min: 1, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' },
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
+          { required: true, message: '请输入密码', trigger: 'blur' },
           {
             min: 1,
             max: 10,
-            message: "长度在 3 到 10 个字符",
-            trigger: "blur",
+            message: '长度在 3 到 10 个字符',
+            trigger: 'blur',
           },
         ],
       },
-    };
+    }
   },
   methods: {
     restClick() {
-      this.$refs.elFormRef.resetFields();
+      this.$refs.elFormRef.resetFields()
     },
     loginClick() {
       this.$refs.elFormRef.validate(async (valid) => {
-        if (!valid) return; //如果为false 执行return 阻止向下执行
-        let { data: res } = await this.$http.post("login", this.userInfo);
-        if (res.meta.status != 200) return this.$message.error("登录失败"); //如果状态码不为二百阻止并打印
-        this.$message.success("登录成功");
+        if (!valid) return //如果为false 执行return 阻止向下执行
+        let { data: res } = await this.$http.post('login', this.userInfo)
+        if (res.meta.status != 200) return this.$message.error('登录失败') //如果状态码不为二百阻止并打印
+        this.$message.success('登录成功')
         // 登录成功之后的token保存到客户端的sessionStorage中
         // token 只应当存在当前网站打开期间生效，所有将token保存在sessionStorage中
-        window.sessionStorage.setItem("token", res.data.token);
-        this.$router.push("/home");
-      });
+        window.sessionStorage.setItem('token', res.data.token)
+        this.$router.push('/home')
+      })
     },
   },
-};
+}
 </script>
 
 <style lang="less" scoped >
