@@ -114,9 +114,44 @@
               icon="el-icon-delete"
               @click="deleteUser(scope.row.id)"
             ></el-button>
-            <el-tooltip content="设置" placement="top" :enterable="false">
-              <el-button type="warning" icon="el-icon-setting"></el-button>
+            <el-tooltip content="分配角色" placement="top" :enterable="false">
+              <el-button
+                type="warning"
+                @click="allotRoleClick(scope.row)"
+                icon="el-icon-setting"
+              ></el-button>
             </el-tooltip>
+            <el-dialog
+              title="提示"
+              :visible.sync="alootdialogVisible"
+              width="30%"
+            >
+              <div>
+                当前的用户 :
+                <span>{{ allotRoleInfo.username }}</span>
+              </div>
+
+              <div>
+                当前的角色 :
+                <span>{{ allotRoleInfo.role_name }}</span>
+              </div>
+              <p>
+                当前选择 :
+                <el-select v-model="checkoutInfo" placeholder="请选择">
+                  <el-option
+                    v-for="item in rolesList"
+                    :key="item.id"
+                    :label="item.roleName"
+                    :value="item.id"
+                  >
+                  </el-option>
+                </el-select>
+              </p>
+              <span slot="footer" class="dialog-footer">
+                <el-button @click="alootdialogVisible = false">取 消</el-button>
+                <el-button type="primary" @click="saveRole">确 定</el-button>
+              </span>
+            </el-dialog>
           </template>
         </el-table-column>
       </el-table>
@@ -147,13 +182,19 @@ export default {
       userList: [],
       total: 0,
       dialogFormVisible: false,
+      // 控制分配角色的dialog显示与隐藏
+      alootdialogVisible: false,
       userinfo: {
         username: '',
         password: '',
         email: '',
         mobile: '',
       },
+      allotRoleInfo: {},
       editUserInfo: {},
+      // 角色列表
+      rolesList: [],
+      checkoutInfo: [],
       rules: {
         username: [
           { required: true, message: '请输入用户名', trigger: 'blur' },
@@ -269,6 +310,21 @@ export default {
       if (response.meta.status !== 200) return this.$message.error('删除失败')
       this.getUsersData()
       this.$message.success('删除成功')
+    },
+    // 分配角色按钮的点击
+    async allotRoleClick(info) {
+      let { data: res } = await this.$http.get('roles')
+      this.allotRoleInfo = info
+      this.rolesList = res.data
+      console.log(this.rolesList)
+      this.alootdialogVisible = true
+    },
+    async saveRole() {
+      await this.$http.put(`users/${this.allotRoleInfo.id}/role`, {
+        rid: this.checkoutInfo,
+      })
+      this.alootdialogVisible = false
+      this.getUsersData()
     },
   },
 }

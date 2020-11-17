@@ -85,7 +85,6 @@ export default {
       // 如果数据加载失败 给出提示信息
       if (res.meta.status != 200) return this.$message.error(res.meta.msg)
       this.menuList = res.data
-      console.log(this.menuList)
     },
     toggleClick() {
       this.isCollapse = !this.isCollapse
